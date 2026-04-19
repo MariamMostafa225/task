@@ -20,6 +20,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void showMessage(String msg) {
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
