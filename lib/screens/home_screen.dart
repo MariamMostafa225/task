@@ -146,12 +146,12 @@ class HomeScreen extends StatelessWidget {
 
             Expanded(
               child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 15,
-                  childAspectRatio: 0.68,
+                itemCount: products.length,//عدد العناصر 
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(//شكل الجريد
+                  crossAxisCount: 2,//كل صف فيه منتجين
+                  mainAxisSpacing: 15,//مسافة بين الصفوف
+                  crossAxisSpacing: 15,//مسافة بين الأعمدة
+                  childAspectRatio: 0.68,//طول وعرض الكارت
                 ),
                 itemBuilder: (_, i) {
                   return Container(
