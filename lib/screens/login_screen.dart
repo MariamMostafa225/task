@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task/screens/home_screen.dart';
-import 'package:task/screens/register_screen.dart';
-import 'package:task/services/auth_service.dart';
 import '../widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,7 +10,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final auth = AuthService();
 
   bool isObscure = true;
 
@@ -21,7 +18,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void showMessage(String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg)),
+    );
   }
 
   @override
@@ -43,7 +42,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 50),
 
-              CustomTextField(hint: "Email", controller: emailController),
+              CustomTextField(
+                hint: "Email",
+                controller: emailController,
+              ),
 
               const SizedBox(height: 20),
 
@@ -65,30 +67,38 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 160,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     String email = emailController.text.trim();
                     String password = passwordController.text.trim();
 
+                    // ✅ check empty email
+                    if (email.isEmpty) {
+                      showMessage("Email cannot be empty");
+                      return;
+                    }
+
+                    // ✅ check valid email format
                     if (!isValidEmail(email)) {
                       showMessage("Enter a valid email");
                       return;
                     }
 
+                    // ✅ check empty password
+                    if (password.isEmpty) {
+                      showMessage("Password cannot be empty");
+                      return;
+                    }
+
+                    // ✅ check password length
                     if (password.length < 6) {
                       showMessage("Password must be at least 6 characters");
                       return;
                     }
 
-                    var user = await auth.login(email, password);
-
-                    if (user != null) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
-                    } else {
-                      showMessage("Login Failed");
-                    }
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4FC3F7),
@@ -114,7 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {},
                 child: const Text(
                   "Forgot password?",
-                  style: TextStyle(color: Color(0xFF616161), fontSize: 16),
+                  style: TextStyle(
+                    color: Color(0xFF616161),
+                    fontSize: 16,
+                  ),
                 ),
               ),
 
@@ -122,14 +135,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => HomeScreen()),
+                  // );
                 },
                 child: const Text(
                   "Not a member? Sign up now",
-                  style: TextStyle(color: Color(0xFF616161), fontSize: 16),
+                  style: TextStyle(
+                    color: Color(0xFF616161),
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
