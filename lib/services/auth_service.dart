@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  // إنشاء نسخة من Firebase Auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // وظيفة التسجيل (Register)
   Future<User?> register(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -18,7 +16,6 @@ class AuthService {
     }
   }
 
-  // وظيفة تسجيل الدخول (Login)
   Future<User?> login(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
@@ -32,7 +29,6 @@ class AuthService {
     }
   }
 
-  // وظيفة تسجيل الخروج
   Future<void> logout() async {
     await _auth.signOut();
   }
