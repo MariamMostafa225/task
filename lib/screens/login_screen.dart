@@ -71,25 +71,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     String email = emailController.text.trim();
                     String password = passwordController.text.trim();
 
-                    // ✅ check empty email
                     if (email.isEmpty) {
                       showMessage("Email cannot be empty");
                       return;
                     }
 
-                    // ✅ check valid email format
                     if (!isValidEmail(email)) {
                       showMessage("Enter a valid email");
                       return;
                     }
 
-                    // ✅ check empty password
                     if (password.isEmpty) {
                       showMessage("Password cannot be empty");
                       return;
                     }
 
-                    // ✅ check password length
                     if (password.length < 6) {
                       showMessage("Password must be at least 6 characters");
                       return;

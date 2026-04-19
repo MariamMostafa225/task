@@ -91,39 +91,44 @@ class HomeScreen extends StatelessWidget {
 
             SizedBox(
               height: 70,
-              child: ListView.separated(
+              child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 10),
-                itemBuilder: (_, i) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(color: Colors.black12, blurRadius: 5),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          categories[i]["icon"],
-                          size: 20,
-                          color: Colors.black,
+                child: Row(
+                  children: List.generate(categories.length, (i) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 10,
                         ),
-                        const SizedBox(width: 5),
-                        Text(
-                          categories[i]["name"],
-                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.black12, blurRadius: 5),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                },
+                        child: Row(
+                          children: [
+                            Icon(
+                              categories[i]["icon"],
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              categories[i]["name"],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
               ),
             ),
 
